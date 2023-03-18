@@ -31,6 +31,7 @@
                 <th scope="col">No</th>
                 <th scope="col">Tanggal Pengaduan</th>
                 <th scope="col">Isi Laporan</th>
+                <th scope="col">tanggapan</th>
                 <th>Status</th>
                 <th scope="col">Foto</th>
                 <th>Action</th>
@@ -42,7 +43,20 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $pengaduan->tgl_pengaduan }}</td>
                 <td>{{ $pengaduan->isi_laporan }}</td>
-                <td>{{ $pengaduan->status }}</td>
+                <td>
+                    @if ($pengaduan->getDataTanggapan == null)
+                        -
+                    @else
+                        {{ $pengaduan->getDataTanggapan->tanggapan }}
+                    @endif
+                </td>
+                <td>
+                    @if ($pengaduan->status == '0')
+                        menunggu respon
+                    @else
+                        {{ $pengaduan->status }}
+                    @endif
+                </td>
                 <td><img src="{{ asset($pengaduan->foto) }}" alt="" width="100px"></td>
                 <td>
                     <form action="/pengaduan/destroy/{{ ($pengaduan->id) }}" method="POST">

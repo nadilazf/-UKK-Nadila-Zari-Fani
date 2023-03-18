@@ -13,7 +13,7 @@ class PengaduanController extends Controller
 {
     public function index()
     {
-        $pengaduans = pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik)->latest()->paginate(5);
+        $pengaduans = pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik)->with('getDataTanggapan')->latest()->paginate(5);
         return view('pengaduan.index', compact('pengaduans'));
     }
 

@@ -45,7 +45,7 @@ Route::middleware('isLogin')->group(function () {
 
     Route::middleware('isAdmin')->group(function (){
         Route::get('/petugas/masyarakat', [MasyarakatController::class, 'index'])->name('masyarakat.index');
-        Route::get('/petugas/masyarakat/destroy/{id}', [MasyarakatController::class, 'destroy'])->name('masyarakat.destroy');
+        Route::delete('/petugas/masyarakat/destroy/{id}', [MasyarakatController::class, 'destroy'])->name('masyarakat.destroy');
 
         Route::get('/petugas', [PetugasController::class, 'index'])->name('petugas.index');
         Route::get('/petugas/create', [PetugasController::class, 'create'])->name('petugas.create');
@@ -66,7 +66,7 @@ Route::middleware('isLogin')->group(function () {
         Route::post('/tanggapan/store/{id_pengaduan}', [TanggapanController::class, 'store'])->name('tanggapan.store');
         Route::get('/tanggapan/edit/{id_tanggapan}', [TanggapanController::class, 'edit'])->name('tanggapan.edit');
         Route::post('/tanggapan/update/{id_tanggapan}', [TanggapanController::class, 'update'])->name('tanggapan.update');
-        Route::delete('/tanggapan/destroy/{id_tanggapan}', [TanggapanController::class, 'destroy'])->name('tanggapan.destroy');
+        Route::delete('/tanggapan/destroy/{id}', [TanggapanController::class, 'destroy'])->name('tanggapan.destroy');
     });
 });
 

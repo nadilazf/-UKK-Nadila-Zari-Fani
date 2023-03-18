@@ -50,7 +50,6 @@ class PetugasController extends Controller
     {
         $validateData = $request->validate([
             'nama' => 'required',
-            'username' => 'required',
             'password' => 'required',
             'telp' => 'required',
             'level' => 'required',
@@ -58,7 +57,7 @@ class PetugasController extends Controller
         $validateData['password'] = bcrypt($validateData['password']);
 
         $petugas = Petugas::findOrFail($id);
-        $petugas->upadet();
+        $petugas->update($validateData);
 
         return redirect()->route('petugas.index')->with('success', 'Data petugas berhasil di update');
     }

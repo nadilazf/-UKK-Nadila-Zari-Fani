@@ -97,7 +97,7 @@ class TanggapanController extends Controller
     public function generatePDF()
     {
         $admin = Auth::guard('petugas')->user()->nama;
-        $tanggapans = Tanggapan::latest()->with('getDataPetugas', 'getDataPengaduan')->get();
+        $tanggapans = Tanggapan::latest()->with('getDataPetugas', 'getDataPengaduan', 'getDataMasyarakat')->get();
 
         $data = [
          'judul' => 'Generate Tanggapan dan Pengaduan',

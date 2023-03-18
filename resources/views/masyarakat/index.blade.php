@@ -34,6 +34,7 @@
                     <th scope="col">Username</th>
                     <th scope="col">NIK</th>
                     <th scope="col">No Telepon</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,14 +45,15 @@
                     <td>{{ $masyarakat->username }}</td>
                     <td>{{ $masyarakat->nik }}</td>
                     <td>{{ $masyarakat->telp }}</td>
+                    <td>
+                        <form action="/petugas/masyarakat/destroy/{{ ($masyarakat->id) }}" method="POST">
 
-                    <form action="/masyarakat/destroy/{{ ($masyarakat->nik) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
 
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
-                    </form>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

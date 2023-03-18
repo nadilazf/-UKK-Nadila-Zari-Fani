@@ -41,7 +41,14 @@
                 <td>{{ $pengaduan->tgl_pengaduan }}</td>
                 <td>{{ $pengaduan->getDataMasyarakat->nama }}</td>
                 <td>{{ $pengaduan->isi_laporan }}</td>
-                <td>{{ $pengaduan->status }}</td>
+                <td>
+                    @if ($pengaduan->status == '0')
+                        menunggu respon
+                    @else
+                        {{ $pengaduan->status }}
+                    @endif
+                </td>
+
                 <td><img src="{{ asset($pengaduan->foto) }}" alt="" width="100px"></td>
                 <td>
                     <form action="{{ route('pengaduan.destroyPetugas', $pengaduan->id) }}" method="POST">
