@@ -46,7 +46,7 @@
                 <td>
                     <form action="{{ route('pengaduan.destroyPetugas', $pengaduan->id) }}" method="POST">
 
-                        <a class="btn btn-primary" href="/tanggapan/create/{{ $pengaduan->id }}" method="POST">Tanggapi</a>
+                        <a class="btn btn-primary" href= '{{ route('tanggapan.create', $pengaduan->id) }}' method="POST">Tanggapi</a>
 
                         @csrf
                             @method('DELETE')
