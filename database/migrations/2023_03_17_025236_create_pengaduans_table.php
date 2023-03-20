@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('isi_laporan');
             $table->string('foto');
             $table->enum('status', ['0', 'proses', 'selesai']);
+            $table->enum('akses', ['privat', 'publik']);
             $table->timestamps();
         });
     }

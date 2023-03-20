@@ -39,43 +39,77 @@
         </thead>
         <tbody>
             @foreach ($pengaduans as $pengaduan)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $pengaduan->tgl_pengaduan }}</td>
-                <td>{{ $pengaduan->isi_laporan }}</td>
-                <td>
-                    @if ($pengaduan->status == '0')
-                        menunggu respon
-                    @else
-                        {{ $pengaduan->status }}
-                    @endif
-                </td>
-                <td>
-                    @if ($pengaduan->getDataTanggapan == null)
-                        -
-                    @else
-                        {{ $pengaduan->getDataTanggapan->tanggapan }}
-                    @endif
-                </td>
-                <td><img src="{{ asset($pengaduan->foto) }}" alt="" width="100px">
-                    @if ($pengaduan->foto == 'privacy')
-                    -
-                    @else
-                    {{ $pengaduan->foto }}
-                    @endif
-                </td>
-                <td>
-                    <form action="/pengaduan/destroy/{{ ($pengaduan->id) }}" method="POST">
+                @if ($pengaduan->akses == 'privat')
+                    @if (Auth::guard('masyarakat')->user()->nik == $pengaduan->nik)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $pengaduan->tgl_pengaduan }}</td>
+                            <td>{{ $pengaduan->isi_laporan }}</td>
+                            <td>
+                                @if ($pengaduan->getDataTanggapan == null)
+                                    -
+                                @else
+                                    {{ $pengaduan->getDataTanggapan->tanggapan }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($pengaduan->status == '0')
+                                    menunggu respon
+                                @else
+                                    {{ $pengaduan->status }}
+                                @endif
+                            </td>
+                            <td>
+                                <img src="{{ asset($pengaduan->foto) }}" alt="" width="100px">
+                            </td>
+                            <td>
+                                <form action="/pengaduan/destroy/{{ ($pengaduan->id) }}" method="POST">
 
-                        <a class="btn btn-primary" href="/pengaduan/edit/{{ $pengaduan->id }}" method="POST">Edit</a>
+                                    <a class="btn btn-primary" href="/pengaduan/edit/{{ $pengaduan->id }}" method="POST">Edit</a>
 
-                        @csrf
-                        @method('DELETE')
+                                    @csrf
+                                    @method('DELETE')
 
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endif
+                @elseif ($pengaduan->akses == 'publik')
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $pengaduan->tgl_pengaduan }}</td>
+                        <td>{{ $pengaduan->isi_laporan }}</td>
+                        <td>
+                            @if ($pengaduan->getDataTanggapan == null)
+                                -
+                            @else
+                                {{ $pengaduan->getDataTanggapan->tanggapan }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($pengaduan->status == '0')
+                                menunggu respon
+                            @else
+                                {{ $pengaduan->status }}
+                            @endif
+                        </td>
+                        <td>
+                            <img src="{{ asset($pengaduan->foto) }}" alt="" width="100px">
+                        </td>
+                        <td>
+                            <form action="/pengaduan/destroy/{{ ($pengaduan->id) }}" method="POST">
+
+                                <a class="btn btn-primary" href="/pengaduan/edit/{{ $pengaduan->id }}" method="POST">Edit</a>
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </table>

@@ -37,7 +37,8 @@ class PengaduanController extends Controller
             'tgl_pengaduan' => 'required',
             'isi_laporan' => 'required',
             'foto' => 'required|mimes:png,jpg',
-            'nik' =>'required'
+            'nik' =>'required',
+            'akses' =>'required'
         ]);
         if ($request->file('foto')) {
             $fileImage = hexdec(uniqid()) . '.' . $request->foto->extension();
