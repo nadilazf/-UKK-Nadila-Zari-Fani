@@ -52,7 +52,7 @@ Route::middleware('isLogin')->group(function () {
         Route::post('/petugas/store', [PetugasController::class, 'store'])->name('petugas.store');
         Route::get('/petugas/edit/{id}', [PetugasController::class, 'edit'])->name('petugas.edit');
         Route::post('/petugas/update{id}', [PetugasController::class, 'update'])->name('petugas.update');
-        Route::delete('/petugas/destroy{id}', [PetugasController::class, 'store'])->name('petugas.destroy');
+        Route::delete('/petugas/destroy/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
 
         Route::get('/petugas/generate_pdf', [TanggapanController::class, 'generatePDF'])->name('generate.pdf');
     });

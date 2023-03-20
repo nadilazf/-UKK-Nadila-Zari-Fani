@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
+use App\Models\Masyarakat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -13,7 +14,8 @@ class PengaduanController extends Controller
 {
     public function index()
     {
-        $pengaduans = pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik)->with('getDataTanggapan')->latest()->paginate(5);
+        $pengaduans = pengaduan::latest()->with('getDataTanggapan')->paginate(5);
+        // pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik)
         return view('pengaduan.index', compact('pengaduans'));
     }
 
@@ -57,6 +59,11 @@ class PengaduanController extends Controller
 
     public function edit($id)
     {
+        $masyarakat = Masyarakat::findOrFail($id);
+        $pengaduans = Pengaduan::where('nik', $masyarakat->nik)->get();
+        if(Auth::guard('masyarakat')->user()) {
+            return back()->with('error', 'kamu engga punya akses');
+        }
         $pengaduan = Pengaduan::find($id);
         if($pengaduan->status == 'selesai') {
             return back()->with('error', 'Status pengaduan sudah selesai');

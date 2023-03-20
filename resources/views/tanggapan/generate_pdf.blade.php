@@ -16,6 +16,8 @@
         <th>No</th>
         <th>Tanggal Pengaduan</th>
         <th>NIK Pelapor</th>
+        <th>Nama Pelapor</th>
+        <th>Nama Petugas</th>
         <th>Isi Aduan</th>
         <th>Isi Tanggapan</th>
       </tr>
@@ -27,6 +29,7 @@
           <td>{{ $tanggapan->getDataPengaduan->tgl_pengaduan }}</td>
           <td>{{ $tanggapan->getDataPengaduan->nik }}</td>
           <td>{{ $tanggapan->getDataPengaduan->getDataMasyarakat->nama }}</td>
+          <td>{{ $tanggapan->getDataPetugas->nama }}</td>
           <td>{{ $tanggapan->getDataPengaduan->isi_laporan }}</td>
           <td>{{ $tanggapan->tanggapan }}</td>
         </tr>
