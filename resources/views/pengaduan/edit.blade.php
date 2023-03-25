@@ -44,6 +44,15 @@
             <label class="input-group-text" for="inputGroupFile02">Upload</label>
           </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 mb-2">
+            <div class="form-group">
+                <strong>Akses :</strong>
+                <select class="form-select" aria-label="Default select example" name="akses">
+                    <option value= "publik">Publik</option>
+                    <option value="privat">Privat</option>
+                    </select>
+                </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>

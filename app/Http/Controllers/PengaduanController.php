@@ -60,9 +60,8 @@ class PengaduanController extends Controller
 
     public function edit($id)
     {
-        $masyarakat = Masyarakat::findOrFail($id);
-        $pengaduans = Pengaduan::where('nik', $masyarakat->nik)->get();
-        if(Auth::guard('masyarakat')->user()) {
+        $pengaduan = Pengaduan::find($id);
+        if (Auth::guard('masyarakat')->user()->nik != $pengaduan->nik) {
             return back()->with('error', 'kamu engga punya akses');
         }
         $pengaduan = Pengaduan::find($id);
@@ -83,12 +82,14 @@ class PengaduanController extends Controller
         $data->tgl_pengaduan = $request->tgl_pengaduan;
         $data->isi_laporan = $request->isi_laporan;
         $data->foto = $pengaduanImage;
+        $data->akses = $request->akses;
         $data->update();
        } else {
         $data = Pengaduan::findOrFail($id);
         $data->tgl_pengaduan = $request->tgl_pengaduan;
         $data->isi_laporan = $request->isi_laporan;
         $data->foto = $request->foto_lama;
+        $data->akses = $request->akses;
         $data->update();
        }
        return redirect()->route('pengaduan.index')->with('success', 'Pengaduanmu sudah berubah');

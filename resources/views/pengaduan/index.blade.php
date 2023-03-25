@@ -31,8 +31,8 @@
                 <th scope="col">No</th>
                 <th scope="col">Tanggal Pengaduan</th>
                 <th scope="col">Isi Laporan</th>
-                <th>Status</th>
                 <th scope="col">tanggapan</th>
+                <th>Status</th>
                 <th scope="col">Foto</th>
                 <th>Action</th>
             </tr>
